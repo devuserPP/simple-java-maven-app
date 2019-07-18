@@ -8,7 +8,8 @@ pipeline {
     options {
         skipStagesAfterUnstable()
     }
-    stages {
+    stages 
+    {
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
@@ -29,3 +30,5 @@ pipeline {
                 sh './jenkins/scripts/deliver.sh'
             }
         }
+    }
+}
