@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Publish to Nexus') {
             steps {
-                nexusPublisher nexusInstanceId: 'nexus-repo', nexusRepositoryId: 'maven-release', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: './target/my-app-1.0-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'my-app-1.0-SNAPSHOT.jar', groupId: 'com.mycompany.app', packaging: 'jar', version: '1.0']]], tagName: '1.1.1'                 
+                nexusPublisher nexusInstanceId: 'nexus-repo', nexusRepositoryId: 'maven-release', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: './target/my-app-1.0-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'my-app-1.0-SNAPSHOT.jar', groupId: 'com.mycompany.app', packaging: 'jar', version: '1.0']]]
                 
             }
         }
