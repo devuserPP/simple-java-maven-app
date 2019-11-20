@@ -28,9 +28,10 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') {
+        stage('Publish to Nexus') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                nexusPublisher nexusInstanceId: 'nexus-repo', nexusRepositoryId: 'maven-release', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: './target/my-app-1.0-SNAPSHOT.jar']], mavenCoordinate: [artifactId: 'my-app-1.0-SNAPSHOT.jar', groupId: 'com.mycompany.app', packaging: 'jar', version: '1.0']]], tagName: '1.1.1'                 
+                
             }
         }
     }
