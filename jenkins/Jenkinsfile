@@ -6,6 +6,17 @@ pipeline {
         }
     }
     stages {
+        
+        stage("Checkout") {
+            steps{                
+                // manual checkout, for testing Jenkinsfile
+                // I creat new pipeline job, definition = pipeline script, copy and paste this file
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'Checkout-Dir']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/devuserPP/simple-java-maven-app.git']]])
+                echo "checkout done"           
+            }
+        }
+        
+        
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
