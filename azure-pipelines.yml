@@ -1,5 +1,6 @@
 # Maven
 
+
 trigger:
 - master
 
@@ -7,6 +8,17 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'devuserpp'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'simple-java-maven-app'
+    cliSources: '.'
+
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -17,16 +29,4 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: true
-    sqMavenPluginVersionChoice: 'latest'
-# Build your Java project and run tests with Apache Maven.
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
