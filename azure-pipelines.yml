@@ -17,7 +17,11 @@ steps:
     configMode: 'manual'
     cliProjectKey: 'simple-java-maven-app'
     cliSources: '.'
+- task: SonarCloudAnalyze@1
 
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 
 - task: Maven@3
   inputs:
